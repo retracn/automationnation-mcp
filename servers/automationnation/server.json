@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.retracn/automationnation",
+  "title": "AutomationNation data tools (via Apify)",
+  "description": "Google Trends, Google Jobs, AI Overview citations, UK business leads and app review AI, one server.",
+  "version": "1.0.0",
+  "websiteUrl": "https://retracn.github.io/automationnation-actors/",
+  "repository": {
+    "url": "https://github.com/retracn/automationnation-mcp",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://retracn.github.io/automationnation-actors/icons/google-trends-scraper.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=automationnation/google-trends-scraper,automationnation/google-jobs-scraper,automationnation/aeo-auditor,automationnation/uk-business-leads,automationnation/app-store-review-miner",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your Apify API token, sent as 'Bearer <token>'. Get it at https://console.apify.com/settings/integrations (free account).",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {apify_token}",
+          "variables": {
+            "apify_token": {
+              "description": "Apify API token",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

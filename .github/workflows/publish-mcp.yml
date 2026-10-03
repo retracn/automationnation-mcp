@@ -1,0 +1,35 @@
+name: Publish to MCP Registry
+
+on:
+  push:
+    branches: [main]
+    paths: ["servers/**", ".github/workflows/publish-mcp.yml"]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Authenticate to MCP Registry (GitHub OIDC)
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish every server
+        run: |
+          ok=0; failed=0
+          for dir in servers/*/; do
+            echo "::group::${dir}"
+            if (cd "$dir" && "$GITHUB_WORKSPACE/mcp-publisher" publish); then ok=$((ok+1)); else failed=$((failed+1)); echo "::warning::${dir} not published (unchanged version?)"; fi
+            echo "::endgroup::"
+          done
+          echo "Published: ${ok}, not published: ${failed}"
+          [ "$ok" -gt 0 ] || [ "$failed" -eq 0 ]

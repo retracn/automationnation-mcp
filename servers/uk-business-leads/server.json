@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.retracn/uk-business-leads",
+  "title": "UK Business Leads (via Apify)",
+  "description": "UK business leads from Google Maps with emails, phones, Companies House directors and outreach.",
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/automationnation/uk-business-leads",
+  "repository": {
+    "url": "https://github.com/retracn/uk-business-leads-google-maps",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://retracn.github.io/automationnation-actors/icons/uk-business-leads.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=automationnation/uk-business-leads",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your Apify API token, sent as 'Bearer <token>'. Get it at https://console.apify.com/settings/integrations (free account).",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {apify_token}",
+          "variables": {
+            "apify_token": {
+              "description": "Apify API token",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
