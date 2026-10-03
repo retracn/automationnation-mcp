@@ -9,7 +9,9 @@ MCP server listings for [AutomationNation's Apify Actors](https://apify.com/auto
 | `io.github.retracn/google-ai-overview-tracker` | Check whether Google AI Overviews cite a website, who's cited instead, and what changed | [aeo-auditor](https://apify.com/automationnation/aeo-auditor) |
 | `io.github.retracn/uk-business-leads` | UK business leads from Google Maps with emails, phones and Companies House directors | [uk-business-leads](https://apify.com/automationnation/uk-business-leads) |
 | `io.github.retracn/app-reviews-ai` | App Store and Google Play reviews summarised into bugs, feature requests and critical issues | [app-store-review-miner](https://apify.com/automationnation/app-store-review-miner) |
-| `io.github.retracn/automationnation` | All five tools in one server | — |
+| `io.github.retracn/app-store-reviews` | App Store reviews for any app and country, past the 500-review limit, with developer replies | [app-store-reviews-scraper](https://apify.com/automationnation/app-store-reviews-scraper) |
+| `io.github.retracn/google-play-reviews` | Google Play reviews for any app, country and language, with thumbs-up counts, app versions and developer replies | [google-play-reviews-scraper](https://apify.com/automationnation/google-play-reviews-scraper) |
+| `io.github.retracn/automationnation` | All seven tools in one server | — |
 
 ## Connect
 
