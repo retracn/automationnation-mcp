@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.retracn/automationnation",
-  "title": "AutomationNation data tools (via Apify)",
-  "description": "AI visibility, Google Trends, Google Jobs, AI Overviews, UK leads and app reviews: one server.",
-  "version": "1.0.2",
-  "websiteUrl": "https://retracn.github.io/automationnation-actors/",
+  "name": "io.github.retracn/ai-visibility",
+  "title": "AI Visibility Tracker (via Apify)",
+  "description": "AI visibility for agents: is a brand mentioned and cited by Gemini, Claude and Google AI Overviews?",
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/automationnation/ai-visibility-tracker",
   "repository": {
-    "url": "https://github.com/retracn/automationnation-mcp",
+    "url": "https://github.com/retracn/ai-visibility-tracker",
     "source": "github"
   },
   "icons": [
     {
-      "src": "https://retracn.github.io/automationnation-actors/icons/google-trends-scraper.png",
+      "src": "https://retracn.github.io/automationnation-actors/icons/ai-visibility-tracker.png",
       "mimeType": "image/png",
       "sizes": [
         "512x512"
@@ -21,7 +21,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=automationnation/ai-visibility-tracker,automationnation/google-trends-scraper,automationnation/google-jobs-scraper,automationnation/aeo-auditor,automationnation/uk-business-leads,automationnation/app-store-review-miner,automationnation/app-store-reviews-scraper,automationnation/google-play-reviews-scraper",
+      "url": "https://mcp.apify.com/?tools=automationnation/ai-visibility-tracker",
       "headers": [
         {
           "name": "Authorization",

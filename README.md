@@ -4,6 +4,7 @@ MCP server listings for [AutomationNation's Apify Actors](https://apify.com/auto
 
 | Server (MCP Registry name) | What the agent can do | Apify Actor |
 |---|---|---|
+| `io.github.retracn/ai-visibility` | Check whether Gemini, Claude and Google AI Overviews mention and cite a brand, against competitors | [ai-visibility-tracker](https://apify.com/automationnation/ai-visibility-tracker) |
 | `io.github.retracn/google-trends` | Google Trends: interest over time, by region and city, rising queries, Trending now | [google-trends-scraper](https://apify.com/automationnation/google-trends-scraper) |
 | `io.github.retracn/google-jobs` | Search Google Jobs: salaries, full descriptions, employer apply links (26 countries) | [google-jobs-scraper](https://apify.com/automationnation/google-jobs-scraper) |
 | `io.github.retracn/google-ai-overview-tracker` | Check whether Google AI Overviews cite a website, who's cited instead, and what changed | [aeo-auditor](https://apify.com/automationnation/aeo-auditor) |
@@ -11,7 +12,7 @@ MCP server listings for [AutomationNation's Apify Actors](https://apify.com/auto
 | `io.github.retracn/app-reviews-ai` | App Store and Google Play reviews summarised into bugs, feature requests and critical issues | [app-store-review-miner](https://apify.com/automationnation/app-store-review-miner) |
 | `io.github.retracn/app-store-reviews` | App Store reviews for any app and country, past the 500-review limit, with developer replies | [app-store-reviews-scraper](https://apify.com/automationnation/app-store-reviews-scraper) |
 | `io.github.retracn/google-play-reviews` | Google Play reviews for any app, country and language, with thumbs-up counts, app versions and developer replies | [google-play-reviews-scraper](https://apify.com/automationnation/google-play-reviews-scraper) |
-| `io.github.retracn/automationnation` | All seven tools in one server | — |
+| `io.github.retracn/automationnation` | All eight tools in one server | — |
 
 ## Connect
 
