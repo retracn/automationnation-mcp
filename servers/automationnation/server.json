@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.retracn/automationnation",
   "title": "AutomationNation data tools (via Apify)",
-  "description": "AI visibility, Google Trends, Google Jobs, AI Overviews, UK leads and app reviews: one server.",
-  "version": "1.0.2",
+  "description": "AI visibility, Google Maps leads, Trends, Jobs, AI Overviews, UK leads, app reviews: one server.",
+  "version": "1.0.3",
   "websiteUrl": "https://retracn.github.io/automationnation-actors/",
   "repository": {
     "url": "https://github.com/retracn/automationnation-mcp",
@@ -21,7 +21,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=automationnation/ai-visibility-tracker,automationnation/google-trends-scraper,automationnation/google-jobs-scraper,automationnation/aeo-auditor,automationnation/uk-business-leads,automationnation/app-store-review-miner,automationnation/app-store-reviews-scraper,automationnation/google-play-reviews-scraper",
+      "url": "https://mcp.apify.com/?tools=automationnation/google-maps-leads,automationnation/ai-visibility-tracker,automationnation/google-trends-scraper,automationnation/google-jobs-scraper,automationnation/aeo-auditor,automationnation/uk-business-leads,automationnation/app-store-review-miner,automationnation/app-store-reviews-scraper,automationnation/google-play-reviews-scraper",
       "headers": [
         {
           "name": "Authorization",
