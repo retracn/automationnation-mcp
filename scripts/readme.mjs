@@ -40,6 +40,8 @@ ${toolRows}
 
 You need an Apify API token: sign up free at [console.apify.com](https://console.apify.com/sign-up), then copy the token from [Settings → API & Integrations](https://console.apify.com/settings/integrations).
 
+MCP Registry name: \`io.github.retracn/automationnation-mcp\`.
+
 **Claude Desktop**: download [automationnation-mcp.mcpb](${REPO}/releases/latest/download/automationnation-mcp.mcpb) (or a smaller toolset below), open it, and paste your token when asked.
 
 **Claude Code**
