@@ -20,7 +20,7 @@ const remote = readdirSync(`${root}servers`).sort().map((d) => JSON.parse(readFi
 
 const readme = `# AutomationNation MCP server: Google Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube transcripts and more for AI agents
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.retracn-0b57d0)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.retracn)
+[![automationnation-mcp MCP server](https://glama.ai/mcp/servers/retracn/automationnation-mcp/badges/score.svg)](https://glama.ai/mcp/servers/retracn/automationnation-mcp) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.retracn-0b57d0)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.retracn)
 
 An MCP server with ${TOOLS.length} data tools for Claude, ChatGPT, Cursor, VS Code and other AI agents. Each tool runs one of [AutomationNation's Apify Actors](https://apify.com/automationnation) on **your Apify account** and returns compact JSON the agent can use straight away: flight fares, hotel prices, product prices, news, jobs, search trends, local business leads, competitors' ads, YouTube transcripts, app reviews and AI-search visibility.
 
