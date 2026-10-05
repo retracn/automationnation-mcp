@@ -1,4 +1,6 @@
-// Builds dist/index.js (one self-contained file) and one MCPB bundle per toolset in dist/.
+// Builds dist/index.js (one self-contained file), one MCPB bundle per toolset in dist/, and a Smithery
+// variant of each in dist/smithery/ whose manifest tools also carry inputSchema (Smithery requires it;
+// the MCPB schema only allows name and description, so those are zipped directly instead of `mcpb pack`).
 //   node scripts/build.mjs            all bundles
 //   node scripts/build.mjs travel     just one
 import { execFileSync } from 'node:child_process';
@@ -6,7 +8,21 @@ import { copyFileSync, createReadStream, mkdirSync, readFileSync, rmSync, writeF
 import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
 import { LISTINGS } from './listings.mjs';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { selectTools } from '../src/tools.js';
+import { createServer } from '../src/server.js';
+
+/** The tools exactly as the server advertises them over MCP (names, titles, JSON schemas, annotations). */
+async function advertisedTools(toolset) {
+    const server = createServer({ toolset });
+    const [a, b] = InMemoryTransport.createLinkedPair();
+    const client = new Client({ name: 'build', version: '1.0.0' });
+    await Promise.all([server.connect(a), client.connect(b)]);
+    const { tools } = await client.listTools();
+    await client.close();
+    return tools;
+}
 
 const root = new URL('..', import.meta.url).pathname;
 const pkg = JSON.parse(readFileSync(`${root}package.json`, 'utf8'));
@@ -81,6 +97,14 @@ for (const [toolset, l] of Object.entries(LISTINGS)) {
     const out = `${root}dist/${manifest.name}.mcpb`;
     execFileSync(`${root}node_modules/.bin/mcpb`, ['pack', dir, out], { stdio: ['ignore', 'ignore', 'inherit'] });
     built[toolset] = { file: `dist/${manifest.name}.mcpb`, sha256: await sha256(out), tools: manifest.tools.length };
+
+    const sdir = `${dir}-smithery`;
+    rmSync(sdir, { recursive: true, force: true });
+    execFileSync('cp', ['-R', dir, sdir]);
+    const full = await advertisedTools(toolset);
+    writeFileSync(`${sdir}/manifest.json`, `${JSON.stringify({ ...manifest, tools: full.map(({ name, title, description, inputSchema, annotations }) => ({ name, title, description, inputSchema, annotations })) }, null, 2)}\n`);
+    mkdirSync(`${root}dist/smithery`, { recursive: true });
+    execFileSync('zip', ['-q', '-r', '-X', `${root}dist/smithery/${manifest.name}.mcpb`, '.'], { cwd: sdir });
     console.log(`${toolset.padEnd(14)} ${manifest.tools.length} tools  ${built[toolset].file}`);
 }
 writeFileSync(`${root}dist/bundles.json`, `${JSON.stringify(built, null, 2)}\n`);

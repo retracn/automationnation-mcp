@@ -1,0 +1,1 @@
+{ "actorSpecification": 1, "name": "mcp-smoke-test", "title": "MCP server smoke test (private)", "version": "0.1", "buildTag": "latest", "dockerfile": "../Dockerfile" }
