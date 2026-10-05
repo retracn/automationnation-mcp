@@ -4,3 +4,5 @@ build/
 .DS_Store
 smoke/server/
 smoke/storage/
+apify-actor/server/
+apify-actor/storage/

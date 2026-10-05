@@ -1,0 +1,16 @@
+{
+    "actorSpecification": 1,
+    "name": "data-tools-mcp-server",
+    "title": "Google Data MCP Server: Flights, Hotels, Shopping, YouTube",
+    "description": "One MCP server with 17 data tools for AI agents: Google Flights and Hotels prices, Google Shopping, News, Images, Videos, Jobs and Trends, YouTube transcripts, Google Maps leads, Ads Transparency, app reviews and AI visibility. Connect Claude, ChatGPT or Cursor with one URL.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "usesStandbyMode": true,
+    "webServerMcpPath": "/mcp",
+    "defaultMemoryMbytes": 256,
+    "minMemoryMbytes": 128,
+    "maxMemoryMbytes": 1024,
+    "input": "./input_schema.json",
+    "storages": { "dataset": "./dataset_schema.json" },
+    "dockerfile": "../Dockerfile"
+}

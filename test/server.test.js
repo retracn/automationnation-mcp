@@ -136,3 +136,34 @@ test('API errors come back as readable tool errors', async () => {
     assert.equal(res.isError, true);
     assert.match(res.content[0].text, /couldn't find/);
 });
+
+test('HTTP mode: readiness probe, token-free listing and per-request tokens', async () => {
+    const { spawn } = await import('node:child_process');
+    const { StreamableHTTPClientTransport } = await import('@modelcontextprotocol/sdk/client/streamableHttp.js');
+    const port = 40000 + Math.floor(Math.random() * 10000);
+    const child = spawn(process.execPath, ['src/index.js', '--http', '--port', String(port)], { env: { PATH: process.env.PATH, APIFY_API_BASE_URL: base, APIFY_TOKEN: 'must-not-be-used' }, stdio: 'ignore' });
+    try {
+        let up = false;
+        for (let i = 0; i < 50 && !up; i++) {
+            await new Promise((r) => setTimeout(r, 100));
+            up = await fetch(`http://127.0.0.1:${port}/`, { headers: { 'x-apify-container-server-readiness-probe': '1' } }).then((r) => r.ok).catch(() => false);
+        }
+        assert.ok(up, 'readiness probe answers 200');
+        const anon = new Client({ name: 'http-test', version: '1.0.0' });
+        await anon.connect(new StreamableHTTPClientTransport(new URL(`http://127.0.0.1:${port}/mcp?tools=travel`)));
+        const { tools } = await anon.listTools();
+        assert.deepEqual(tools.map((t) => t.name).sort(), ['get_run_results', 'search_flights', 'search_hotels']);
+        const noToken = await anon.callTool({ name: 'search_flights', arguments: { origin: 'JFK', destination: 'LHR' } });
+        assert.equal(noToken.isError, true, 'a self-hosted server never falls back to its own APIFY_TOKEN');
+        await anon.close();
+        calls.length = 0;
+        const user = new Client({ name: 'http-test', version: '1.0.0' });
+        await user.connect(new StreamableHTTPClientTransport(new URL(`http://127.0.0.1:${port}/mcp`), { requestInit: { headers: { Authorization: 'Bearer user-token' } } }));
+        const res = await user.callTool({ name: 'search_flights', arguments: { origin: 'JFK', destination: 'LHR', max_results: 2 } });
+        assert.ok(!res.isError, res.content[0].text);
+        assert.equal(calls.find((c) => c.method === 'POST').auth, 'Bearer user-token');
+        await user.close();
+    } finally {
+        child.kill();
+    }
+});

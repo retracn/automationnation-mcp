@@ -1,6 +1,5 @@
 #!/bin/bash
-# Deploys the private smoke-test Actor (automationnation/mcp-smoke-test) with the current server code.
-# Run it on Apify to call every tool against the live Actors; results land in the run's dataset.
+# Deploys automationnation/data-tools-mcp-server (Actor Standby, MCP at /mcp) with the current server code.
 # Pushes from a temp copy: apify push skips git-ignored files, and the copied server/ is git-ignored.
 set -euo pipefail
 export PATH=/opt/homebrew/bin:$PATH

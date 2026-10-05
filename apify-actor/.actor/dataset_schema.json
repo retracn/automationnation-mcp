@@ -1,0 +1,19 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "tool": { "type": "string", "description": "MCP tool name." },
+            "title": { "type": "string", "description": "Human-readable tool title." },
+            "description": { "type": "string", "description": "What the tool does." },
+            "mcpUrl": { "type": "string", "description": "MCP endpoint to connect a client to." }
+        }
+    },
+    "views": {
+        "overview": {
+            "title": "Tools",
+            "transformation": { "fields": ["tool", "title", "description", "mcpUrl"] },
+            "display": { "component": "table", "properties": { "tool": { "label": "Tool" }, "title": { "label": "Title" }, "description": { "label": "Description" }, "mcpUrl": { "label": "MCP URL", "format": "link" } } }
+        }
+    }
+}

@@ -428,7 +428,13 @@ export const TOOLS = [
             'advertiserName', 'format', 'firstShown', 'lastShown', 'daysShown', 'headline', ['texts', { maxArray: 3 }], 'displayUrl', 'landingUrl',
             'youtubeUrl', ['imageUrls', { maxArray: 2 }], 'adUrl', 'region',
         ]),
-        summary: (items, a) => `${items.length} ads by ${items[0]?.advertiserName ?? a.advertiser}${a.region !== 'anywhere' ? ` shown in ${a.region.toUpperCase()}` : ''}.`,
+        summary: (items, a) => {
+            const who = [...new Set(items.map((x) => x.advertiserName).filter(Boolean))];
+            const where = a.region !== 'anywhere' ? ` shown in ${a.region.toUpperCase()}` : '';
+            // A domain returns every advertiser whose ads link to it (e.g. a brand's regional companies).
+            const by = who.length > 1 ? ` from ${who.length} advertisers (${who.slice(0, 3).join(', ')}${who.length > 3 ? '…' : ''})` : who.length ? ` by ${who[0]}` : '';
+            return `${items.length} ad${items.length === 1 ? '' : 's'}${/\./.test(a.advertiser) && !/^AR\d/i.test(a.advertiser) ? ` linking to ${a.advertiser}` : ''}${by}${where}.`;
+        },
     },
     {
         name: 'get_app_reviews',

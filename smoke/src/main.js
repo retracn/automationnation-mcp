@@ -4,7 +4,27 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 
 await Actor.init();
-const { only = [], concurrency = 4 } = (await Actor.getInput()) ?? {};
+const { only = [], concurrency = 4, remoteUrl } = (await Actor.getInput()) ?? {};
+if (remoteUrl) {
+    // Remote mode: test a hosted (Standby) MCP endpoint with this run's own token.
+    const { StreamableHTTPClientTransport } = await import('@modelcontextprotocol/sdk/client/streamableHttp.js');
+    const remote = new Client({ name: 'smoke-remote', version: '1.0.0' });
+    const t0 = Date.now();
+    await remote.connect(new StreamableHTTPClientTransport(new URL(remoteUrl), { requestInit: { headers: { Authorization: `Bearer ${process.env.APIFY_TOKEN}` } } }));
+    const { tools } = await remote.listTools();
+    console.log(`Remote lists ${tools.length} tools after ${Math.round((Date.now() - t0) / 1000)}s`);
+    const out = [];
+    for (const [name, args] of [['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 3 }], ['get_youtube_transcripts', { videos: ['UF8uR6Z6KLc'], max_characters: 500 }]]) {
+        const s0 = Date.now();
+        const res = await remote.callTool({ name, arguments: args }, undefined, { timeout: 330_000, resetTimeoutOnProgress: true });
+        const text = res.content?.[0]?.text ?? '';
+        out.push({ name, ok: !res.isError, secs: Math.round((Date.now() - s0) / 1000), summary: text.split('\n')[0] });
+        console.log(`${res.isError ? 'FAIL' : 'OK  '} ${name} ${out.at(-1).secs}s ${out.at(-1).summary}`);
+    }
+    await remote.close();
+    await Actor.pushData({ remoteUrl, tools: tools.length, calls: out });
+    await Actor.exit();
+}
 const CASES = [
     ['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 5 }],
     ['search_hotels', { location: 'Paris', max_results: 5 }],

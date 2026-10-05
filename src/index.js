@@ -20,7 +20,9 @@ const waitSecs = Number(arg('wait') ?? process.env.AUTOMATIONNATION_WAIT_SECS) |
 
 if (arg('http')) {
     const { startHttp } = await import('./http.js');
-    startHttp({ toolset, waitSecs, port: Number(arg('port') ?? process.env.PORT) || 8080 });
+    // Only on Apify Standby (one run per user) may the run's own token stand in for a missing request token.
+    const onStandby = process.env.APIFY_IS_AT_HOME && process.env.APIFY_META_ORIGIN === 'STANDBY';
+    startHttp({ toolset, waitSecs, port: Number(arg('port') ?? process.env.ACTOR_WEB_SERVER_PORT ?? process.env.PORT) || 8080, defaultToken: onStandby ? process.env.APIFY_TOKEN : '' });
 } else {
     const token = process.env.APIFY_TOKEN || process.env.APIFY_API_TOKEN || '';
     const server = createServer({ token, toolset, waitSecs });
