@@ -1,0 +1,54 @@
+{
+  "name": "automationnation-mcp",
+  "version": "1.0.0",
+  "description": "MCP server with 17 data tools for AI agents: Google Flights, Hotels, Shopping, News, Images, Videos, Jobs, Trends, Maps leads, Ads Transparency, YouTube transcripts, app reviews and AI visibility. Runs AutomationNation's Apify Actors on your Apify account.",
+  "type": "module",
+  "bin": {
+    "automationnation-mcp": "src/index.js"
+  },
+  "main": "src/index.js",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "apify",
+    "google-flights",
+    "google-hotels",
+    "google-shopping",
+    "google-news",
+    "google-jobs",
+    "google-trends",
+    "youtube-transcript",
+    "google-maps",
+    "lead-generation",
+    "app-reviews",
+    "ai-visibility",
+    "ai-agents"
+  ],
+  "author": "AutomationNation",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/retracn/automationnation-mcp"
+  },
+  "homepage": "https://github.com/retracn/automationnation-mcp",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^2.1.2",
+    "esbuild": "^0.28.2"
+  }
+}
