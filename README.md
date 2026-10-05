@@ -13,7 +13,15 @@ MCP server listings for [AutomationNation's Apify Actors](https://apify.com/auto
 | `io.github.retracn/app-reviews-ai` | App Store and Google Play reviews summarised into bugs, feature requests and critical issues | [app-store-review-miner](https://apify.com/automationnation/app-store-review-miner) |
 | `io.github.retracn/app-store-reviews` | App Store reviews for any app and country, past the 500-review limit, with developer replies | [app-store-reviews-scraper](https://apify.com/automationnation/app-store-reviews-scraper) |
 | `io.github.retracn/google-play-reviews` | Google Play reviews for any app, country and language, with thumbs-up counts, app versions and developer replies | [google-play-reviews-scraper](https://apify.com/automationnation/google-play-reviews-scraper) |
-| `io.github.retracn/automationnation` | All nine tools in one server | — |
+| `io.github.retracn/google-shopping` | Google Shopping for AI agents: product prices, discounts, stores, ratings and reviews. | [google-shopping-scraper](https://apify.com/automationnation/google-shopping-scraper) |
+| `io.github.retracn/google-images` | Google Images for AI agents: full-size image URLs, sizes and source pages, with filters. | [google-images-scraper](https://apify.com/automationnation/google-images-scraper) |
+| `io.github.retracn/google-news` | Google News for AI agents: headlines, sources, dates and article URLs, with time filters. | [google-news-scraper](https://apify.com/automationnation/google-news-scraper) |
+| `io.github.retracn/google-videos` | Google video results for AI agents: YouTube, TikTok and more, with channel and duration. | [google-videos-scraper](https://apify.com/automationnation/google-videos-scraper) |
+| `io.github.retracn/youtube-transcripts` | YouTube transcripts for AI agents: text and timestamps for any video, channel or playlist. | [youtube-transcript-scraper](https://apify.com/automationnation/youtube-transcript-scraper) |
+| `io.github.retracn/google-ads-transparency` | Competitors' Google ads for AI agents: every ad a brand runs, with dates and ad text. | [google-ads-transparency-scraper](https://apify.com/automationnation/google-ads-transparency-scraper) |
+| `io.github.retracn/google-hotels` | Google Hotels for AI agents: prices for your dates, ratings, star class, location, photos. | [google-hotels-scraper](https://apify.com/automationnation/google-hotels-scraper) |
+| `io.github.retracn/google-flights` | Google Flights for AI agents: prices, airlines, flight numbers, times, stops, emissions. | [google-flights-scraper](https://apify.com/automationnation/google-flights-scraper) |
+| `io.github.retracn/automationnation` | All 17 tools in one server | — |
 
 ## Connect
 

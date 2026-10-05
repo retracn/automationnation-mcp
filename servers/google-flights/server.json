@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.retracn/google-flights",
+  "title": "Google Flights (via Apify)",
+  "description": "Google Flights for AI agents: prices, airlines, flight numbers, times, stops, emissions.",
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/automationnation/google-flights-scraper",
+  "repository": {
+    "url": "https://github.com/retracn/google-flights-scraper",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://retracn.github.io/automationnation-actors/icons/google-flights-scraper.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=automationnation/google-flights-scraper",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your Apify API token, sent as 'Bearer <token>'. Get it at https://console.apify.com/settings/integrations (free account).",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {apify_token}",
+          "variables": {
+            "apify_token": {
+              "description": "Apify API token",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

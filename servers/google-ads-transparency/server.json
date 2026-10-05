@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.retracn/google-ads-transparency",
+  "title": "Google Ads Transparency (via Apify)",
+  "description": "Competitors' Google ads for AI agents: every ad a brand runs, with dates and ad text.",
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/automationnation/google-ads-transparency-scraper",
+  "repository": {
+    "url": "https://github.com/retracn/google-ads-transparency-scraper",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://retracn.github.io/automationnation-actors/icons/google-ads-transparency-scraper.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=automationnation/google-ads-transparency-scraper",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your Apify API token, sent as 'Bearer <token>'. Get it at https://console.apify.com/settings/integrations (free account).",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {apify_token}",
+          "variables": {
+            "apify_token": {
+              "description": "Apify API token",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
