@@ -36,11 +36,11 @@ export const LISTINGS = {
         keywords: ['google-news', 'news', 'headlines', 'media-monitoring'],
     },
     'google-search': {
-        title: 'Google Search Verticals',
+        title: 'Google Search',
         smithery: 'google-search',
-        icon: 'google-images-scraper.png',
-        description: 'Google Shopping, News, Images and Videos results as data for AI agents, in any country and language.',
-        keywords: ['google', 'serp', 'google-images', 'google-videos', 'google-news', 'google-shopping'],
+        icon: 'google-custom-search-api.png',
+        description: 'Google web search for AI agents (title, link, snippet), plus Google Shopping, News, Images and Videos, in any country and language.',
+        keywords: ['google', 'google-search', 'web-search', 'serp', 'google-images', 'google-videos', 'google-news', 'google-shopping'],
     },
     jobs: {
         title: 'Google Jobs',

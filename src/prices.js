@@ -15,7 +15,7 @@ export default {
     "app-store-reviews-scraper": "$0.08 per 1,000 reviews ($0.05–$0.07 on paid plans)",
     "google-play-reviews-scraper": "$0.08 per 1,000 reviews ($0.05–$0.07 on paid plans)",
     "aeo-auditor": "$0.04 per keyword ($0.032 on Gold), plus $2 per run from 17 Nov 2026; $0.01 per keyword until 16 Oct 2026",
-    "google-maps-leads": "$0.03 per lead ($0.024 on Gold)",
+    "google-maps-leads": "$0.03 per lead ($0.024 on Gold); $0.08 per business found with the no-website or unclaimed filters",
     "uk-business-leads": "$0.05 per lead ($0.04 on Gold)",
     "app-store-review-miner": "$0.05 per app report ($0.04 on Gold)",
     "companies-house-leads": "$0.008 per lead",
