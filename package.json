@@ -1,7 +1,7 @@
 {
   "name": "automationnation-mcp",
-  "version": "1.0.0",
-  "description": "MCP server with 17 data tools for AI agents: Google Flights, Hotels, Shopping, News, Images, Videos, Jobs, Trends, Maps leads, Ads Transparency, YouTube transcripts, app reviews and AI visibility. Runs AutomationNation's Apify Actors on your Apify account.",
+  "version": "1.1.0",
+  "description": "MCP server with 18 data tools for AI agents: Google web search, Flights, Hotels, Shopping, News, Images, Videos, Jobs, Trends, Maps leads, Ads Transparency, YouTube transcripts, app reviews and AI visibility. Runs AutomationNation's Apify Actors on your Apify account.",
   "type": "module",
   "bin": {
     "automationnation-mcp": "src/index.js"

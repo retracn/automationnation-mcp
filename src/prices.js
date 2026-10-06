@@ -9,6 +9,7 @@ export default {
     "google-ads-transparency-scraper": "$1 per 1,000 ads ($0.80 on Gold and above)",
     "google-news-scraper": "$1 per 1,000 articles ($0.80 on Gold and above)",
     "google-images-scraper": "$0.25 per 1,000 images ($0.20 on Gold and above)",
+    "google-custom-search-api": "$5 per 1,000 searches of up to 10 results ($4 on Gold and above)",
     "google-videos-scraper": "$1 per 1,000 videos ($0.80 on Gold and above)",
     "google-trends-scraper": "$1 per 1,000 keyword reports ($0.27–$0.90 on paid plans) · $0.50 per 1,000 trending searches",
     "app-store-reviews-scraper": "$0.08 per 1,000 reviews ($0.05–$0.07 on paid plans)",

@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.retracn/automationnation-mcp",
   "title": "AutomationNation Data Tools",
-  "description": "Agent tools: Google Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube transcripts",
-  "version": "1.0.1",
+  "description": "Agent tools: Google web search, Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube",
+  "version": "1.1.0",
   "websiteUrl": "https://github.com/retracn/automationnation-mcp",
   "repository": {
     "url": "https://github.com/retracn/automationnation-mcp",
@@ -21,9 +21,9 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/retracn/automationnation-mcp/releases/download/v1.0.0/automationnation-mcp.mcpb",
-      "version": "1.0.0",
-      "fileSha256": "0342e231aaf0888aae3306d1c42779f91188bf75d6812d49ed7a2620b76b2a37",
+      "identifier": "https://github.com/retracn/automationnation-mcp/releases/download/v1.1.0/automationnation-mcp.mcpb",
+      "version": "1.1.0",
+      "fileSha256": "a5b01a1c817153c55cd71e00dd3b4112a05ac83f679deee6059fdb52042675dd",
       "transport": {
         "type": "stdio"
       },

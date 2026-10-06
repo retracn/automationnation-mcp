@@ -9,7 +9,7 @@
             "description": "Which tools the MCP server lists. Fewer tools keep the agent's context small. You can also choose per connection with ?tools=travel (or youtube, leads, …) on the MCP URL.",
             "editor": "select",
             "enum": ["all", "travel", "youtube", "shopping", "news", "google-search", "jobs", "trends", "leads", "ads", "app-reviews", "ai-visibility"],
-            "enumTitles": ["All 17 tools", "Google Flights and Hotels", "YouTube transcripts", "Google Shopping", "Google News", "Google Shopping, News, Images and Videos", "Google Jobs", "Google Trends", "Google Maps leads (worldwide and UK)", "Google Ads Transparency", "App Store and Google Play reviews", "AI visibility and AI Overview citations"],
+            "enumTitles": ["All 18 tools", "Google Flights and Hotels", "YouTube transcripts", "Google Shopping", "Google News", "Google web search, Shopping, News, Images and Videos", "Google Jobs", "Google Trends", "Google Maps leads (worldwide and UK)", "Google Ads Transparency", "App Store and Google Play reviews", "AI visibility and AI Overview citations"],
             "default": "all",
             "prefill": "all"
         }

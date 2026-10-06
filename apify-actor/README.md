@@ -1,6 +1,6 @@
 # Google Data MCP Server: Flights, Hotels, Shopping, YouTube and more for AI agents
 
-**One MCP server with 17 data tools for Claude, ChatGPT, Cursor and other AI agents.** Connect it with one URL and your agent can look up Google Flights fares, Google Hotels prices, Google Shopping, News, Images, Videos, Jobs and Trends, YouTube transcripts, Google Maps business leads, competitors' Google ads, App Store and Google Play reviews, and AI-search visibility. No install and no scraping code.
+**One MCP server with 18 data tools for Claude, ChatGPT, Cursor and other AI agents.** Connect it with one URL and your agent can search Google, look up Google Flights fares, Google Hotels prices, Google Shopping, News, Images, Videos, Jobs and Trends, YouTube transcripts, Google Maps business leads, competitors' Google ads, App Store and Google Play reviews, and AI-search visibility. No install and no scraping code.
 
 ## Connect in one step
 

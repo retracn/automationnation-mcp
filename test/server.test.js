@@ -62,7 +62,7 @@ async function connect(env) {
 test('lists every tool without a token and explains how to add one', async () => {
     const client = await connect({});
     const { tools } = await client.listTools();
-    assert.equal(tools.length, 18);
+    assert.equal(tools.length, 19);
     for (const t of tools) {
         assert.ok(t.description.length > 80, `${t.name} has a real description`);
         assert.equal(t.annotations.readOnlyHint, true);

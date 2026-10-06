@@ -2,7 +2,7 @@
 
 [![automationnation-mcp MCP server](https://glama.ai/mcp/servers/retracn/automationnation-mcp/badges/score.svg)](https://glama.ai/mcp/servers/retracn/automationnation-mcp) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE) [![MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.retracn-0b57d0)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.retracn)
 
-An MCP server with 17 data tools for Claude, ChatGPT, Cursor, VS Code and other AI agents. Each tool runs one of [AutomationNation's Apify Actors](https://apify.com/automationnation) on **your Apify account** and returns compact JSON the agent can use straight away: flight fares, hotel prices, product prices, news, jobs, search trends, local business leads, competitors' ads, YouTube transcripts, app reviews and AI-search visibility.
+An MCP server with 18 data tools for Claude, ChatGPT, Cursor, VS Code and other AI agents. Each tool runs one of [AutomationNation's Apify Actors](https://apify.com/automationnation) on **your Apify account** and returns compact JSON the agent can use straight away: flight fares, hotel prices, product prices, news, jobs, search trends, local business leads, competitors' ads, YouTube transcripts, app reviews and AI-search visibility.
 
 - **Purpose-built tools**: short, documented inputs (`origin`, `destination`, `departure_date`…) instead of raw scraper schemas, and outputs trimmed to the fields an agent needs.
 - **Pay per result, no subscription**: usage is billed by each Actor on your Apify account (prices below). [A free Apify account](https://console.apify.com/sign-up) includes monthly credit.
@@ -17,6 +17,7 @@ An MCP server with 17 data tools for Claude, ChatGPT, Cursor, VS Code and other 
 |---|---|---|
 | `search_flights` | Search Google Flights for one route and date. | [$0.20 per 1,000 flights ($0.16 on Gold and above)](https://apify.com/automationnation/google-flights-scraper) |
 | `search_hotels` | Search Google Hotels for a city, neighbourhood or landmark. | [$1 per 1,000 hotels ($0.80 on Gold and above)](https://apify.com/automationnation/google-hotels-scraper) |
+| `search_google` | Search Google and get the web results in Google's order: title, URL, site and snippet for each. | [$5 per 1,000 searches of up to 10 results ($4 on Gold and above)](https://apify.com/automationnation/google-custom-search-api) |
 | `search_google_shopping` | Search Google Shopping for a product in any country. | [$1 per 1,000 products ($0.80 on Gold and above)](https://apify.com/automationnation/google-shopping-scraper) |
 | `get_youtube_transcripts` | Get the transcript (captions) of YouTube videos, with title, channel, duration, caption language and word count, and optional timestamps. | [$1.50 per 1,000 transcripts ($1.20 on Gold and above)](https://apify.com/automationnation/youtube-transcript-scraper) |
 | `search_google_news` | Search Google News for a topic, company or person. | [$1 per 1,000 articles ($0.80 on Gold and above)](https://apify.com/automationnation/google-news-scraper) |

@@ -4,7 +4,7 @@ export const LISTINGS = {
         title: 'AutomationNation Data Tools',
         smithery: 'data-tools',
         icon: 'automationnation.png',
-        description: '17 data tools for AI agents: Google Flights, Hotels, Shopping, News, Images, Videos, Jobs and Trends, Google Maps leads, Ads Transparency, YouTube transcripts, app reviews and AI visibility.',
+        description: '18 data tools for AI agents: Google web search, Flights, Hotels, Shopping, News, Images, Videos, Jobs and Trends, Google Maps leads, Ads Transparency, YouTube transcripts, app reviews and AI visibility.',
         keywords: ['google', 'scraper', 'travel', 'shopping', 'news', 'jobs', 'trends', 'youtube', 'leads', 'app-reviews', 'ai-visibility'],
     },
     travel: {
