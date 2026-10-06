@@ -74,6 +74,32 @@ claude mcp add automationnation -e APIFY_TOKEN=your_apify_token -- npx -y github
 }
 \`\`\`
 
+**Hosted endpoint for any client with remote MCP** (Streamable HTTP, nothing to install; your token goes in a header):
+
+\`\`\`json
+{
+  "mcpServers": {
+    "automationnation": {
+      "url": "https://automationnation--data-tools-mcp-server.apify.actor/mcp",
+      "headers": { "Authorization": "Bearer your_apify_token" }
+    }
+  }
+}
+\`\`\`
+
+**Open WebUI**: Admin Panel → Settings → External Tools → **+**, type **MCP (Streamable HTTP)**, URL \`https://automationnation--data-tools-mcp-server.apify.actor/mcp\`, auth **Bearer** with your Apify token. Prefer single tools? See [open-webui-tools](https://github.com/retracn/open-webui-tools).
+
+**LibreChat** (\`librechat.yaml\`):
+
+\`\`\`yaml
+mcpServers:
+  automationnation:
+    type: streamable-http
+    url: https://automationnation--data-tools-mcp-server.apify.actor/mcp
+    headers:
+      Authorization: "Bearer your_apify_token"
+\`\`\`
+
 **Smithery**: \`npx -y @smithery/cli mcp add automationnation/data-tools\`
 
 **Self-hosted over HTTP** (one deployment serves many users; each client sends its own token as \`Authorization: Bearer <APIFY_TOKEN>\`):
