@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.retracn/google-search",
+  "title": "Google Search (via Apify)",
+  "description": "Google web search for AI agents: title, link and snippet in Custom Search JSON API format.",
+  "version": "1.0.0",
+  "websiteUrl": "https://apify.com/automationnation/google-custom-search-api",
+  "repository": {
+    "url": "https://github.com/retracn/google-custom-search-api-alternative",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://retracn.github.io/automationnation-actors/icons/google-custom-search-api.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=automationnation/google-custom-search-api",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your Apify API token, sent as 'Bearer <token>'. Get it at https://console.apify.com/settings/integrations (free account).",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {apify_token}",
+          "variables": {
+            "apify_token": {
+              "description": "Apify API token",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
