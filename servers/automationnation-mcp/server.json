@@ -3,7 +3,7 @@
   "name": "io.github.retracn/automationnation-mcp",
   "title": "AutomationNation Data Tools",
   "description": "Agent tools: Google web search, Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://github.com/retracn/automationnation-mcp",
   "repository": {
     "url": "https://github.com/retracn/automationnation-mcp",
@@ -21,9 +21,9 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/retracn/automationnation-mcp/releases/download/v1.1.0/automationnation-mcp.mcpb",
-      "version": "1.1.0",
-      "fileSha256": "a5b01a1c817153c55cd71e00dd3b4112a05ac83f679deee6059fdb52042675dd",
+      "identifier": "https://github.com/retracn/automationnation-mcp/releases/download/v1.1.1/automationnation-mcp.mcpb",
+      "version": "1.1.1",
+      "fileSha256": "98bff8717e521e75f46a7531c113f8666a65dbe283ee2f52a9fd4570ea5322e7",
       "transport": {
         "type": "stdio"
       },

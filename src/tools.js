@@ -156,6 +156,21 @@ export const TOOLS = [
             ...(a.file_type && { fileType: a.file_type.replace(/^\./, '') }),
         }),
         maxItems: (a) => a.max_results,
+        // Served by the Actor's Custom Search-compatible HTTP endpoint (a warm Standby run, no Actor start per
+        // call): one request per page of up to 10 results, all pages at once.
+        endpoint: (a) => {
+            const params = {
+                q: a.query, gl: a.country.toLowerCase(), hl: a.language,
+                ...(a.site && { siteSearch: a.site }),
+                ...(a.file_type && { fileType: a.file_type.replace(/^\./, '') }),
+                ...(a.time !== 'any' && { dateRestrict: { day: 'd1', week: 'w1', month: 'm1', year: 'y1' }[a.time] }),
+            };
+            const pages = [];
+            for (let start = 1; start <= Math.min(a.max_results, 100); start += 10) {
+                pages.push({ ...params, start: String(start), num: String(Math.min(10, a.max_results - start + 1)) });
+            }
+            return pages;
+        },
         format: (items) => shape(items, ['position', 'title', 'link', 'displayLink', ['snippet', { maxString: 300 }]]),
         summary: (items, a) => `${items.length} Google results for "${a.query}"${a.site ? ` on ${a.site}` : ''}.`,
     },

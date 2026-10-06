@@ -14,7 +14,12 @@ if (remoteUrl) {
     const { tools } = await remote.listTools();
     console.log(`Remote lists ${tools.length} tools after ${Math.round((Date.now() - t0) / 1000)}s: ${tools.map((t) => t.name).join(', ')}`);
     const out = [];
-    for (const [name, args] of [['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 3 }], ['get_youtube_transcripts', { videos: ['UF8uR6Z6KLc'], max_characters: 1000 }]]) {
+    const REMOTE_CASES = [
+        ['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 3 }],
+        ['get_youtube_transcripts', { videos: ['UF8uR6Z6KLc'], max_characters: 1000 }],
+        ['search_google', { query: 'best crm for startups', max_results: 5 }],
+    ].filter(([name]) => !only.length || only.includes(name));
+    for (const [name, args] of REMOTE_CASES) {
         const s0 = Date.now();
         // Apify's hosted MCP server prefixes proxied tools, e.g. automati--data-tools-mcp-server--search_flights-3f2a.
         const tool = tools.find((t) => t.name === name || new RegExp(`(^|--)${name.slice(0, 26)}(-[0-9a-f]{4})?$`).test(t.name));
@@ -29,6 +34,7 @@ if (remoteUrl) {
     await Actor.exit();
 }
 const CASES = [
+    ['search_google', { query: 'best crm for startups', max_results: 5 }],
     ['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 5 }],
     ['search_hotels', { location: 'Paris', max_results: 5 }],
     ['search_google_shopping', { query: 'wireless earbuds', max_results: 5 }],

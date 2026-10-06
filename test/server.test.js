@@ -31,6 +31,11 @@ const mock = createServer(async (req, res) => {
         polls += 1;
         return send(200, { data: { id: `run-${run[1]}`, status: 'SUCCEEDED', defaultDatasetId: `ds-${run[1]}`, startedAt: new Date().toISOString(), finishedAt: new Date().toISOString() } });
     }
+    if (url.pathname === '/cse/customsearch/v1') {
+        const start = Number(url.searchParams.get('start'));
+        const num = Number(url.searchParams.get('num'));
+        return send(200, { kind: 'customsearch#search', items: Array.from({ length: num }, (_, i) => ({ kind: 'customsearch#result', title: `Result ${start + i}`, link: `https://example.com/${start + i}`, displayLink: 'example.com', snippet: 's'.repeat(400), htmlSnippet: 'x' })) });
+    }
     const ds = url.pathname.match(/^\/datasets\/ds-(.+)\/items$/);
     if (ds) return send(200, ROWS[ds[1]] ?? []);
     return send(404, { error: { type: 'record-not-found', message: 'nope' } });
@@ -55,7 +60,7 @@ afterEach(async () => {
 async function connect(env) {
     const client = new Client({ name: 'test', version: '1.0.0' });
     open.add(client);
-    await client.connect(new StdioClientTransport({ command: process.execPath, args: ['src/index.js'], env: { PATH: process.env.PATH, APIFY_API_BASE_URL: base, ...env } }));
+    await client.connect(new StdioClientTransport({ command: process.execPath, args: ['src/index.js'], env: { PATH: process.env.PATH, APIFY_API_BASE_URL: base, AUTOMATIONNATION_CSE_URL: `${base}/cse/customsearch/v1`, ...env } }));
     return client;
 }
 
@@ -128,6 +133,25 @@ test('UK leads need a city or postcode; Actor defaults are overridden', async ()
     calls.length = 0;
     await client.callTool({ name: 'get_app_reviews', arguments: { app: 'com.spotify.music' } });
     assert.equal(calls.find((c) => c.method === 'POST').path, '/acts/automationnation~google-play-reviews-scraper/runs');
+});
+
+test('search_google calls the Custom Search endpoint page by page, with the token', async () => {
+    calls.length = 0;
+    const client = await connect({ APIFY_TOKEN: 'test-token' });
+    const res = await client.callTool({ name: 'search_google', arguments: { query: 'best crm', site: 'reddit.com', time: 'month', max_results: 15 } });
+    assert.ok(!res.isError, res.content[0].text);
+    const reqs = calls.filter((c) => c.path === '/cse/customsearch/v1').sort((x, y) => Number(x.query.start) - Number(y.query.start));
+    assert.deepEqual(reqs.map((c) => [c.query.start, c.query.num]), [['1', '10'], ['11', '5']]);
+    assert.equal(reqs[0].auth, 'Bearer test-token');
+    assert.deepEqual([reqs[0].query.q, reqs[0].query.siteSearch, reqs[0].query.dateRestrict, reqs[0].query.gl], ['best crm', 'reddit.com', 'm1', 'us']);
+    assert.equal(calls.filter((c) => c.method === 'POST').length, 0, 'no Actor run is started');
+    const [head, served, json] = res.content[0].text.split('\n');
+    assert.match(head, /^15 Google results for "best crm" on reddit\.com\./);
+    assert.match(served, /google-custom-search-api/);
+    const rows = JSON.parse(json);
+    assert.deepEqual([rows[0].position, rows[14].position, rows[14].title], [1, 15, 'Result 15']);
+    assert.ok(rows[0].snippet.length <= 301);
+    assert.equal(rows[0].htmlSnippet, undefined);
 });
 
 test('API errors come back as readable tool errors', async () => {

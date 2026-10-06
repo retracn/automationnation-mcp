@@ -4,9 +4,9 @@ import { explainError, getItems, getRun, runActor, runUrl } from './apify.js';
 import { compact } from './format.js';
 import { actorOf, chargeCap, selectTools } from './tools.js';
 
-export const VERSION = '1.0.0';
+export const VERSION = '1.1.1';
 
-const INSTRUCTIONS = `Data tools backed by AutomationNation's Apify Actors: Google Flights, Hotels, Shopping, News, Images, Videos, Jobs and Trends, Google Maps business leads, Google Ads Transparency, YouTube transcripts, App Store and Google Play reviews, and AI search visibility.
+const INSTRUCTIONS = `Data tools backed by AutomationNation's Apify Actors: Google web search, Google Flights, Hotels, Shopping, News, Images, Videos, Jobs and Trends, Google Maps business leads, Google Ads Transparency, YouTube transcripts, App Store and Google Play reviews, and AI search visibility.
 Every tool call starts a run on the user's Apify account and is billed per result there (Apify's free plan includes monthly credit). Keep max_results modest unless the user asks for more.
 Tools return a one-line summary, a link to the Apify run and compact JSON. If a tool says the run is still running, call get_run_results with its run_id a little later.`;
 
@@ -28,10 +28,42 @@ function render({ summary, run, items, elapsed, note }) {
     return `${header}\n${json}`;
 }
 
+const CSE_URL = process.env.AUTOMATIONNATION_CSE_URL || 'https://automationnation--google-custom-search-api.apify.actor/customsearch/v1';
+
+/** Tools with an endpoint() call a Custom Search-compatible HTTP endpoint instead of starting an Actor run. */
+async function executeEndpoint(tool, args, extra, token) {
+    const started = Date.now();
+    const pages = tool.endpoint(args);
+    const results = await Promise.all(pages.map(async (params) => {
+        try {
+            const res = await fetch(`${CSE_URL}?${new URLSearchParams(params)}`, {
+                headers: { Authorization: `Bearer ${token}` },
+                signal: extra?.signal ?? AbortSignal.timeout(120_000),
+            });
+            const body = await res.json().catch(() => ({}));
+            if (!res.ok) return { error: body?.error?.message ?? `HTTP ${res.status}` };
+            return { items: (body.items ?? []).map((item, i) => ({ position: Number(params.start) + i, ...item })) };
+        } catch (e) {
+            return { error: e.message };
+        }
+    }));
+    const rows = results.flatMap((r) => r.items ?? []);
+    const errors = results.filter((r) => r.error).map((r) => r.error);
+    const elapsed = Math.round((Date.now() - started) / 1000);
+    if (!rows.length && errors.length) return text(`${tool.title} failed: ${errors[0]}`, true);
+    const head = [
+        tool.summary(rows, args),
+        `Served by https://apify.com/automationnation/${tool.slug} in ${elapsed}s; billed per search of up to 10 results on your Apify account.`,
+        errors.length ? `${errors.length} of ${pages.length} pages failed: ${errors[0]}` : null,
+    ].filter(Boolean).join('\n');
+    return text(`${head}\n${JSON.stringify(tool.format(rows, args))}`);
+}
+
 async function execute(tool, args, extra, { token, waitSecs }) {
     if (!token) return text(NO_TOKEN, true);
     const problem = tool.validate?.(args);
     if (problem) return text(problem, true);
+    if (tool.endpoint) return executeEndpoint(tool, args, extra, token);
     const progressToken = extra?._meta?.progressToken;
     const onProgress = progressToken === undefined ? undefined : (run, secs) => extra.sendNotification({
         method: 'notifications/progress',
