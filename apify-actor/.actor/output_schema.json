@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "AutomationNation MCP server",
+    "properties": {
+        "tools": {
+            "type": "string",
+            "title": "Tools and connection URL",
+            "description": "The MCP tools this server offers and the URL to connect to.",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        }
+    }
+}

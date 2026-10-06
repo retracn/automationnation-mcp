@@ -442,7 +442,7 @@ export const TOOLS = [
         toolsets: ['app-reviews'],
         slug: (a) => (appStore(a) === 'google_play' ? 'google-play-reviews-scraper' : 'app-store-reviews-scraper'),
         cost: { unit: 0.0001 },
-        description: `App reviews from the Apple App Store or Google Play: star rating, title, text, date, reviewer, app version, helpful votes and the developer's reply. Accepts store URLs, App Store IDs, Google Play package names or app names. Filter by star rating (e.g. 1–2 stars for complaints), sort by newest or most relevant, in any country and language. Up to 500 reviews per call. Cost on your Apify account: ${price('app-store-reviews-scraper')}.`,
+        description: `App reviews from the Apple App Store or Google Play: star rating, title, text, date, reviewer and the developer's reply, plus app version and helpful votes for Google Play. Accepts store URLs, App Store IDs, Google Play package names or app names. Filter by star rating (e.g. 1–2 stars for complaints), sort by newest or most relevant, in any country and language. Up to 500 reviews per call. Cost on your Apify account: ${price('app-store-reviews-scraper')}.`,
         inputSchema: {
             app: z.string().min(2).describe('App Store URL or numeric ID (324684580), Google Play URL or package name (com.spotify.music), or an app name (Spotify).'),
             store: z.enum(['auto', 'app_store', 'google_play']).default('auto').describe('Which store. auto reads it from the URL or ID; plain app names go to the App Store unless you choose google_play.'),

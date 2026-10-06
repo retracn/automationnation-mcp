@@ -23,7 +23,25 @@ https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server
 }
 ```
 
+**Claude Code:** install the plugin, which adds this connector plus skills for travel, research, competitor ads, leads and AI-visibility tasks:
+
+```
+/plugin marketplace add retracn/automationnation-data-tools
+/plugin install automationnation-data-tools@automationnation
+```
+
 Add `?tools=travel` (or `youtube`, `shopping`, `news`, `google-search`, `jobs`, `trends`, `leads`, `ads`, `app-reviews`, `ai-visibility`) to the URL to load only the tools you need.
+
+## Try asking
+
+- "Find the cheapest nonstop flight from London to New York on 12 December, and three 4-star hotels in Midtown for those three nights."
+- "Summarise this YouTube video with timestamps for the key points: https://www.youtube.com/watch?v=UF8uR6Z6KLc"
+- "How has search interest in electric bikes changed in the UK over the past year, and what's rising?"
+- "What's the cheapest price for AirPods Pro on Google Shopping in the US right now, and from which stores?"
+- "Show me the Google ads hubspot.com runs in the UK and which ones have run the longest."
+- "Find 20 dentists in Austin without a website, with phone numbers."
+- "What are people complaining about in Duolingo's recent App Store reviews?"
+- "Do Google AI Overviews, Gemini and Claude recommend Notion for team wikis, and who do they name instead?"
 
 ## Tools
 

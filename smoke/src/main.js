@@ -12,13 +12,16 @@ if (remoteUrl) {
     const t0 = Date.now();
     await remote.connect(new StreamableHTTPClientTransport(new URL(remoteUrl), { requestInit: { headers: { Authorization: `Bearer ${process.env.APIFY_TOKEN}` } } }));
     const { tools } = await remote.listTools();
-    console.log(`Remote lists ${tools.length} tools after ${Math.round((Date.now() - t0) / 1000)}s`);
+    console.log(`Remote lists ${tools.length} tools after ${Math.round((Date.now() - t0) / 1000)}s: ${tools.map((t) => t.name).join(', ')}`);
     const out = [];
-    for (const [name, args] of [['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 3 }], ['get_youtube_transcripts', { videos: ['UF8uR6Z6KLc'], max_characters: 500 }]]) {
+    for (const [name, args] of [['search_flights', { origin: 'JFK', destination: 'LHR', max_results: 3 }], ['get_youtube_transcripts', { videos: ['UF8uR6Z6KLc'], max_characters: 1000 }]]) {
         const s0 = Date.now();
-        const res = await remote.callTool({ name, arguments: args }, undefined, { timeout: 330_000, resetTimeoutOnProgress: true });
+        // Apify's hosted MCP server prefixes proxied tools, e.g. automati--data-tools-mcp-server--search_flights-3f2a.
+        const tool = tools.find((t) => t.name === name || new RegExp(`(^|--)${name.slice(0, 26)}(-[0-9a-f]{4})?$`).test(t.name));
+        if (!tool) throw new Error(`No tool matching ${name}: ${tools.map((t) => t.name).join(', ')}`);
+        const res = await remote.callTool({ name: tool.name, arguments: args }, undefined, { timeout: 330_000, resetTimeoutOnProgress: true });
         const text = res.content?.[0]?.text ?? '';
-        out.push({ name, ok: !res.isError, secs: Math.round((Date.now() - s0) / 1000), summary: text.split('\n')[0] });
+        out.push({ name: tool.name, ok: !res.isError, secs: Math.round((Date.now() - s0) / 1000), summary: text.split('\n')[0] });
         console.log(`${res.isError ? 'FAIL' : 'OK  '} ${name} ${out.at(-1).secs}s ${out.at(-1).summary}`);
     }
     await remote.close();

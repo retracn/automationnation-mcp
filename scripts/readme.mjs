@@ -38,7 +38,15 @@ ${toolRows}
 
 ## Install
 
-You need an Apify API token: sign up free at [console.apify.com](https://console.apify.com/sign-up), then copy the token from [Settings → API & Integrations](https://console.apify.com/settings/integrations).
+**No install (Claude, ChatGPT and other clients with remote MCP):** add this URL as a connector and sign in with Apify:
+
+\`\`\`
+https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server
+\`\`\`
+
+It runs the same server hosted on Apify ([data-tools-mcp-server](https://apify.com/automationnation/data-tools-mcp-server)). Clients that use \`mcp.json\` can connect to \`https://automationnation--data-tools-mcp-server.apify.actor/mcp\` with the header \`Authorization: Bearer <APIFY_TOKEN>\`. Add \`?tools=travel\` (or any toolset below) to load fewer tools.
+
+**Run it yourself:** You need an Apify API token: sign up free at [console.apify.com](https://console.apify.com/sign-up), then copy the token from [Settings → API & Integrations](https://console.apify.com/settings/integrations).
 
 MCP Registry name: \`io.github.retracn/automationnation-mcp\`.
 
@@ -109,6 +117,20 @@ node scripts/build.mjs        # dist/index.js plus one .mcpb bundle per toolset
 \`\`\`
 
 \`servers/*/server.json\` are the MCP Registry listings; the GitHub Actions workflow publishes them when they change.
+
+## Related: drop-in packages for broken libraries
+
+The same Actors also power open-source drop-in replacements. Change one import and keep your code:
+
+| Package | Replaces | Fixes |
+|---|---|---|
+| [pytrends-cloud](https://github.com/retracn/pytrends-cloud) (Python) | pytrends | 429 TooManyRequestsError |
+| [youtube-transcript-cloud](https://github.com/retracn/youtube-transcript-cloud) (Python) | youtube-transcript-api | RequestBlocked / IpBlocked on cloud servers |
+| [youtube-transcript-cloud](https://github.com/retracn/youtube-transcript-cloud-js) (npm) | youtube-transcript | Fails in production on Vercel, Lambda, Render |
+| [google-trends-api-cloud](https://github.com/retracn/google-trends-api-cloud) (npm) | google-trends-api | 429s; dailyTrends and realTimeTrends 404 |
+| [app-store-scraper-cloud](https://github.com/retracn/app-store-scraper-cloud) (npm) | app-store-scraper | reviews() 403 / "Unexpected token <", 500-review cap |
+| [jobspy-google](https://github.com/retracn/jobspy-google) (Python) | JobSpy's Google source | "Google Jobs is currently unavailable" |
+| [amadeus-cloud](https://github.com/retracn/amadeus-cloud) (npm) | Amadeus SDK flight search | Self-Service keys switched off (July 2026) |
 
 More: [guides and examples](https://retracn.github.io/automationnation-actors/) · [all AutomationNation Actors](https://apify.com/automationnation)
 

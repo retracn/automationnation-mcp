@@ -26,7 +26,7 @@ An MCP server with 17 data tools for Claude, ChatGPT, Cursor, VS Code and other 
 | `find_local_businesses` | Find local businesses on Google Maps in any country, as sales leads. | [$0.03 per lead ($0.024 on Gold)](https://apify.com/automationnation/google-maps-leads) |
 | `find_uk_business_leads` | UK business leads from Google Maps, enriched from Companies House: everything find_local_businesses returns plus the company director's name, company number, incorporation date, company age and SIC codes, with a match-confidence rating. | [$0.05 per lead ($0.04 on Gold)](https://apify.com/automationnation/uk-business-leads) |
 | `get_advertiser_ads` | Every ad an advertiser runs on Google Search, YouTube, Display and Shopping, from Google's Ads Transparency Center. | [$1 per 1,000 ads ($0.80 on Gold and above)](https://apify.com/automationnation/google-ads-transparency-scraper) |
-| `get_app_reviews` | App reviews from the Apple App Store or Google Play: star rating, title, text, date, reviewer, app version, helpful votes and the developer's reply. | [$0.08 per 1,000 reviews ($0.05–$0.07 on paid plans)](https://apify.com/automationnation/app-store-reviews-scraper) |
+| `get_app_reviews` | App reviews from the Apple App Store or Google Play: star rating, title, text, date, reviewer and the developer's reply, plus app version and helpful votes for Google Play. | [$0.08 per 1,000 reviews ($0.05–$0.07 on paid plans)](https://apify.com/automationnation/app-store-reviews-scraper) |
 | `analyze_app_reviews` | AI analysis of the latest App Store and Google Play reviews for up to 5 apps: top bugs, top feature requests, critical issues, competitor mentions, a sentiment summary, the rating distribution and the app versions mentioned. | [$0.05 per app report ($0.04 on Gold)](https://apify.com/automationnation/app-store-review-miner) |
 | `check_ai_overview_citations` | Check Google AI Overviews for your keywords: whether an AI Overview appears, whether it cites your domain and at what position, which domains and competitors it cites instead, whether your brand is mentioned, the AI Overview text, your organic rank, and what changed since your last check. | [$0.04 per keyword ($0.032 on Gold), plus $2 per run from 17 Nov 2026; $0.01 per keyword until 16 Oct 2026](https://apify.com/automationnation/aeo-auditor) |
 | `check_ai_visibility` | Ask AI assistants the questions your customers ask and see whether they mention and cite your brand. | [$0.05 per answer checked ($0.04 on Gold) + $0.50 per optional report](https://apify.com/automationnation/ai-visibility-tracker) |
@@ -34,7 +34,15 @@ An MCP server with 17 data tools for Claude, ChatGPT, Cursor, VS Code and other 
 
 ## Install
 
-You need an Apify API token: sign up free at [console.apify.com](https://console.apify.com/sign-up), then copy the token from [Settings → API & Integrations](https://console.apify.com/settings/integrations).
+**No install (Claude, ChatGPT and other clients with remote MCP):** add this URL as a connector and sign in with Apify:
+
+```
+https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server
+```
+
+It runs the same server hosted on Apify ([data-tools-mcp-server](https://apify.com/automationnation/data-tools-mcp-server)). Clients that use `mcp.json` can connect to `https://automationnation--data-tools-mcp-server.apify.actor/mcp` with the header `Authorization: Bearer <APIFY_TOKEN>`. Add `?tools=travel` (or any toolset below) to load fewer tools.
+
+**Run it yourself:** You need an Apify API token: sign up free at [console.apify.com](https://console.apify.com/sign-up), then copy the token from [Settings → API & Integrations](https://console.apify.com/settings/integrations).
 
 MCP Registry name: `io.github.retracn/automationnation-mcp`.
 
@@ -106,7 +114,8 @@ Every Actor is also available on Apify's hosted MCP server with OAuth sign-in. T
 | `io.github.retracn/ai-visibility` | AI visibility for agents: is a brand mentioned and cited by Gemini, Claude and Google AI Overviews? | `https://mcp.apify.com/?tools=automationnation/ai-visibility-tracker` |
 | `io.github.retracn/app-reviews-ai` | AI summary of App Store and Google Play reviews: bugs, feature requests and critical issues. | `https://mcp.apify.com/?tools=automationnation/app-store-review-miner` |
 | `io.github.retracn/app-store-reviews` | App Store reviews for AI agents: any app or country, past the 500-review limit, with dev replies. | `https://mcp.apify.com/?tools=automationnation/app-store-reviews-scraper` |
-| `io.github.retracn/automationnation` | Google Shopping, Flights, Hotels, News, Images, Ads, Jobs, Trends, YouTube transcripts, leads. | `https://mcp.apify.com/?tools=automationnation/google-maps-le…` |
+| `io.github.retracn/automationnation` | 17 tools: Google Flights, Hotels, Shopping, News, Jobs, Trends, YouTube transcripts, leads, ads. | `https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server` |
+| `io.github.retracn/automationnation-mcp` | Agent tools: Google Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube transcripts | `https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server` |
 | `io.github.retracn/google-ads-transparency` | Competitors' Google ads for AI agents: every ad a brand runs, with dates and ad text. | `https://mcp.apify.com/?tools=automationnation/google-ads-transparency-scraper` |
 | `io.github.retracn/google-ai-overview-tracker` | Check if Google AI Overviews cite your website: citations, competitors and changes over time. | `https://mcp.apify.com/?tools=automationnation/aeo-auditor` |
 | `io.github.retracn/google-flights` | Google Flights for AI agents: prices, airlines, flight numbers, times, stops, emissions. | `https://mcp.apify.com/?tools=automationnation/google-flights-scraper` |
@@ -133,6 +142,20 @@ node scripts/build.mjs        # dist/index.js plus one .mcpb bundle per toolset
 ```
 
 `servers/*/server.json` are the MCP Registry listings; the GitHub Actions workflow publishes them when they change.
+
+## Related: drop-in packages for broken libraries
+
+The same Actors also power open-source drop-in replacements. Change one import and keep your code:
+
+| Package | Replaces | Fixes |
+|---|---|---|
+| [pytrends-cloud](https://github.com/retracn/pytrends-cloud) (Python) | pytrends | 429 TooManyRequestsError |
+| [youtube-transcript-cloud](https://github.com/retracn/youtube-transcript-cloud) (Python) | youtube-transcript-api | RequestBlocked / IpBlocked on cloud servers |
+| [youtube-transcript-cloud](https://github.com/retracn/youtube-transcript-cloud-js) (npm) | youtube-transcript | Fails in production on Vercel, Lambda, Render |
+| [google-trends-api-cloud](https://github.com/retracn/google-trends-api-cloud) (npm) | google-trends-api | 429s; dailyTrends and realTimeTrends 404 |
+| [app-store-scraper-cloud](https://github.com/retracn/app-store-scraper-cloud) (npm) | app-store-scraper | reviews() 403 / "Unexpected token <", 500-review cap |
+| [jobspy-google](https://github.com/retracn/jobspy-google) (Python) | JobSpy's Google source | "Google Jobs is currently unavailable" |
+| [amadeus-cloud](https://github.com/retracn/amadeus-cloud) (npm) | Amadeus SDK flight search | Self-Service keys switched off (July 2026) |
 
 More: [guides and examples](https://retracn.github.io/automationnation-actors/) · [all AutomationNation Actors](https://apify.com/automationnation)
 

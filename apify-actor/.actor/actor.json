@@ -11,6 +11,9 @@
     "minMemoryMbytes": 128,
     "maxMemoryMbytes": 1024,
     "input": "./input_schema.json",
-    "storages": { "dataset": "./dataset_schema.json" },
-    "dockerfile": "../Dockerfile"
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "dockerfile": "../Dockerfile",
+    "output": "./output_schema.json"
 }

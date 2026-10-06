@@ -3,7 +3,7 @@
   "name": "io.github.retracn/automationnation-mcp",
   "title": "AutomationNation Data Tools",
   "description": "Agent tools: Google Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube transcripts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://github.com/retracn/automationnation-mcp",
   "repository": {
     "url": "https://github.com/retracn/automationnation-mcp",
@@ -34,6 +34,28 @@
           "isRequired": true,
           "isSecret": true,
           "format": "string"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Your Apify API token, sent as 'Bearer <token>'. Get it at https://console.apify.com/settings/integrations (free account).",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {apify_token}",
+          "variables": {
+            "apify_token": {
+              "description": "Apify API token",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
         }
       ]
     }
