@@ -25,11 +25,19 @@ jobs:
 
       - name: Publish every server
         run: |
-          ok=0; failed=0
+          # A version that is already in the registry is skipped, not an error: bump "version" in server.json to republish.
+          ok=0; skipped=0; failed=0
           for dir in servers/*/; do
             echo "::group::${dir}"
-            if (cd "$dir" && "$GITHUB_WORKSPACE/mcp-publisher" publish); then ok=$((ok+1)); else failed=$((failed+1)); echo "::warning::${dir} not published (unchanged version?)"; fi
+            if out=$(cd "$dir" && "$GITHUB_WORKSPACE/mcp-publisher" publish 2>&1); then
+              ok=$((ok+1))
+            elif grep -q "cannot publish duplicate version" <<<"$out"; then
+              skipped=$((skipped+1))
+            else
+              failed=$((failed+1)); echo "::error::${dir} not published"
+            fi
+            echo "$out"
             echo "::endgroup::"
           done
-          echo "Published: ${ok}, not published: ${failed}"
-          [ "$ok" -gt 0 ] || [ "$failed" -eq 0 ]
+          echo "Published: ${ok}, already up to date: ${skipped}, failed: ${failed}"
+          [ "$failed" -eq 0 ]

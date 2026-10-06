@@ -29,6 +29,8 @@ An MCP server with ${TOOLS.length} data tools for Claude, ChatGPT, Cursor, VS Co
 - **Safe by default**: every run carries a spending cap of about 3x its expected cost; long runs return partial results with a \`run_id\` instead of timing out.
 - **Works without a token for discovery**: tools are listed before you configure anything, so clients and registries can inspect them.
 
+**Try it without installing anything:** add \`https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server\` as a connector in Claude, ChatGPT or any remote-MCP client, sign in with Apify, and ask something like *"find nonstop flights from London to New York on 12 November"*. Other ways to run it are under [Install](#install).
+
 ## Tools
 
 | Tool | What it does | Price on your Apify account |

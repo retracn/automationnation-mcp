@@ -9,6 +9,8 @@ An MCP server with 17 data tools for Claude, ChatGPT, Cursor, VS Code and other 
 - **Safe by default**: every run carries a spending cap of about 3x its expected cost; long runs return partial results with a `run_id` instead of timing out.
 - **Works without a token for discovery**: tools are listed before you configure anything, so clients and registries can inspect them.
 
+**Try it without installing anything:** add `https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server` as a connector in Claude, ChatGPT or any remote-MCP client, sign in with Apify, and ask something like *"find nonstop flights from London to New York on 12 November"*. Other ways to run it are under [Install](#install).
+
 ## Tools
 
 | Tool | What it does | Price on your Apify account |
@@ -114,7 +116,7 @@ Every Actor is also available on Apify's hosted MCP server with OAuth sign-in. T
 | `io.github.retracn/ai-visibility` | AI visibility for agents: is a brand mentioned and cited by Gemini, Claude and Google AI Overviews? | `https://mcp.apify.com/?tools=automationnation/ai-visibility-tracker` |
 | `io.github.retracn/app-reviews-ai` | AI summary of App Store and Google Play reviews: bugs, feature requests and critical issues. | `https://mcp.apify.com/?tools=automationnation/app-store-review-miner` |
 | `io.github.retracn/app-store-reviews` | App Store reviews for AI agents: any app or country, past the 500-review limit, with dev replies. | `https://mcp.apify.com/?tools=automationnation/app-store-reviews-scraper` |
-| `io.github.retracn/automationnation` | 17 tools: Google Flights, Hotels, Shopping, News, Jobs, Trends, YouTube transcripts, leads, ads. | `https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server` |
+| `io.github.retracn/automationnation` | Google Shopping, Flights, Hotels, News, Images, Ads, Jobs, Trends, YouTube transcripts, leads. | `https://mcp.apify.com/?tools=automationnation/google-maps-le…` |
 | `io.github.retracn/automationnation-mcp` | Agent tools: Google Flights, Hotels, Shopping, News, Jobs, Trends, Maps leads, YouTube transcripts | `https://mcp.apify.com/?tools=automationnation/data-tools-mcp-server` |
 | `io.github.retracn/google-ads-transparency` | Competitors' Google ads for AI agents: every ad a brand runs, with dates and ad text. | `https://mcp.apify.com/?tools=automationnation/google-ads-transparency-scraper` |
 | `io.github.retracn/google-ai-overview-tracker` | Check if Google AI Overviews cite your website: citations, competitors and changes over time. | `https://mcp.apify.com/?tools=automationnation/aeo-auditor` |
